@@ -1,0 +1,42 @@
+#!/bin/bash
+if [ `whoami` == root ]; then
+  echo "DONT run this script as root, or using sudo"
+  exit
+fi
+
+echo ""
+echo "*************************************"
+echo "* Setting up ideal Unix environment *"
+echo "*************************************"
+echo ""
+
+BASEDIR=$(cd "$(dirname "$0")"; pwd)
+
+cd `dirname $0`
+
+# Installing vim
+echo ""
+echo "===>  Installing VIM  <==="
+echo "--->  Backing up any previous .vimrc"
+cp $HOME/.vimrc $HOME/.vimrc.bak
+echo "--->  Linking .vimrc"
+ln -sf $BASEDIR/vim/vimrc $HOME/.vimrc
+echo "--->  Linking .vim folder"
+ln -sf $BASEDIR/vim/vim $HOME/.vim
+
+# Installing zsh
+echo ""
+echo "===>  Installing bash profile  <==="
+echo "--->  Making backup of bash_profile"
+cp $HOME/.bash_profile $HOME/.bash_profile.bak
+
+# Clear home of any conflicting zsh files
+rm -f $HOME/.bash_profile
+
+echo "--->  Linking bash_profile"
+ln -sf $BASEDIR/shell/bash_profile $HOME/.bash_profile
+
+source ~/.bash_profile
+
+echo ""
+echo "====  Successfully installed Thomas's environment  ===="
