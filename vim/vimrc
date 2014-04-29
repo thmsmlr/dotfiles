@@ -11,11 +11,7 @@ call vundle#rc()
 
 " My Bundles
 
-" Helps me see things
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-
 " Helps me deal with Git
-Bundle 'airblade/vim-gitgutter'
 Bundle 'tpope/vim-fugitive'
 
 " Helps me move
@@ -26,7 +22,6 @@ Bundle 'tmhedberg/matchit'
 
 " Helps me search
 Bundle 'mileszs/ack.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
 
 " Helps me align things
 Bundle 'godlygeek/tabular'
@@ -44,6 +39,8 @@ let mapleader = ","
 """""""""""""""
 " Preferences "
 """""""""""""""
+
+set t_ti=t_te= 
 " Set 256 ANSI Colors
 let &t_Co=256
 :color sunburst
@@ -55,27 +52,67 @@ syntax enable
 hi Search cterm=NONE ctermfg=black ctermbg=white
 
 set autoindent
-set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
-set backspace=2                                              " Fix broken backspace in some setups
-set clipboard=unnamed                                        " yank and paste with the system clipboard
-set directory-=.                                             " don't store swapfiles in the current directory
+" reload files when changed on disk, i.e. via `git checkout`
+set autoread
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+" Store temporary files in a central spot
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+" yank and paste with the system clipboard
+set clipboard=unnamed
+
 set encoding=utf-8
-set expandtab                                                " expand tabs to spaces
-set hlsearch                                                 " Highlight all occurrences of a search
-set ignorecase                                               " case-insensitive search
-set incsearch                                                " search as you type
-set laststatus=2                                             " always show statusline
-set list                                                     " show trailing whitespace
+
+" expand tabs to spaces
+set expandtab
+
+" search as you type
+set incsearch
+
+" Highlight all occurrences of a search
+set hlsearch
+
+" case-insensitive search
+set ignorecase
+
+" always show statusline
+set laststatus=2
+
+" show trailing whitespace
+set list
 set listchars=tab:▸\ ,trail:▫
-set number                                                   " show line numbers
-set ruler                                                    " show where you are
-set scrolloff=3                                              " show context above/below cursorline
-set shiftwidth=2                                             " normal mode indentation commands use 2 spaces
+
+" show line numbers
+set number
+
+" show where you are
+set ruler
+
+" show context above/below cursorline
+set scrolloff=3
+
+" normal mode indentation commands use 2 spaces
+set shiftwidth=2
+
+" Display incomplete commands
 set showcmd
-set smartcase                                                " case-sensitive search if any caps
-set softtabstop=2                                            " insert mode tab and backspace use 2 spaces
-set tabstop=4                                                " actual tabs occupy 8 characters
-set wildmenu                                                 " show a navigable menu for tab completion
+
+" case-sensitive search if any caps
+set smartcase
+
+" insert mode tab and backspace use 2 spaces
+set softtabstop=2
+
+" actual tabs occupy 8 characters
+set tabstop=4
+
+" show a navigable menu for tab completion
+set wildmenu
 set wildmode=longest,list,full
 
 " make searches case-sensitive only if they contain upper-case characters
@@ -139,7 +176,7 @@ map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimr
 " Custom Characters
 imap <C-\> λ
 
-" plugin settings
+" plugin Settings
 let g:ctrlp_working_path_mode = 0 
 let g:ctrlp_match_window = 'order:ttb,max:20'
 let g:ctrlp_arg_map = 't'
@@ -158,8 +195,8 @@ function! s:wig2cmd()
   let expr = substitute(expr, '\\,', ',', 'g')
 
   " Set the user_command option
-  let g:ctrlp_user_command = 'ag %s -f -l --nocolor -g "" | grep -v -p "'. expr .'"'
-  " let g:ctrlp_user_command = 'ag %s -f -l --nocolor -g ""'
+  " let g:ctrlp_user_command = 'ag %s -f -l --nocolor -g "" | grep -v -p "'. expr .'"'
+  let g:ctrlp_user_command = 'ag %s -f -l --nocolor -g ""'
   " let g:ctrlp_user_command = 'find %s -type f'
 endfunction
 
@@ -175,6 +212,20 @@ if executable('ag')
 endif
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
 
 " Manually source custom plugins
 source ~/.vim/whitespace/plugin/whitespace.vim
