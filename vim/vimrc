@@ -30,7 +30,6 @@ Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-commentary'
 
 " Required!
-set term=builtin_ansi
 filetype plugin indent on
 syntax on
 
@@ -40,7 +39,6 @@ let mapleader = ","
 " Preferences "
 """""""""""""""
 
-set t_ti=t_te= 
 " Set 256 ANSI Colors
 let &t_Co=256
 :color sunburst
@@ -134,11 +132,6 @@ filetype plugin indent on
 vnoremap < <gv
 vnoremap > >gv
 
-if has("gui_macvim")
-  :set guifont=Monaco:h14 
-  :set guioptions-=T
-end
-
 " Set files to ignore
 set wildignore+=*.pdf,*/tmp/*,*.so,*.swp,*.zip,*/bin/*,*.pyc,*/bundle/*,*/node_modules/*,*/bower_components/*,*/*.egg/*,*/*.egg-info*/*
 
@@ -159,8 +152,6 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 map 0 ^
-map <Tab> gt
-map <S-Tab> gT
 nmap <leader>s :w<CR>
 nmap <leader>f :Ack 
 nmap <leader>a= :Tabularize /=<CR>
