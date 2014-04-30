@@ -14,29 +14,55 @@ BASEDIR=$(cd "$(dirname "$0")"; pwd)
 
 cd `dirname $0`
 
-# Installing vim
+#
+# Installing vim configurations
+#
 echo ""
-echo "===>  Installing VIM  <==="
+echo "===>  Installing vim  <==="
 echo "--->  Backing up any previous .vimrc"
 cp $HOME/.vimrc $HOME/.vimrc.bak
 echo "--->  Linking .vimrc"
-ln -sf $BASEDIR/vim/vimrc $HOME/.vimrc
+ln -sf $BASEDIR/.vimrc $HOME/.vimrc
 echo "--->  Linking .vim folder"
-ln -sf $BASEDIR/vim/vim $HOME/.vim
+ln -sf $BASEDIR/vim $HOME/.vim
 
-# Installing zsh
+#
+# Installing tmux configurations
+#
 echo ""
-echo "===>  Installing bash profile  <==="
-echo "--->  Making backup of bash_profile"
-cp $HOME/.bash_profile $HOME/.bash_profile.bak
+echo "===>  Installing tmux configurations <==="
+echo "--->  Making backup of .tmux.conf"
+cp $HOME/.tmux.conf $HOME/.tmux.conf.bak
+echo "--->  Linking .tmux.conf"
+ln -sf $BASEDIR/.tmux.conf $HOME/.tmux.conf
 
-# Clear home of any conflicting zsh files
-rm -f $HOME/.bash_profile
+#
+# Installing Git configurations
+#
+echo ""
+echo "===>  Installing git configurations <==="
+echo "--->  Making backup of .gitignore_global"
+cp $HOME/.gitignore_global $HOME/.gitignore_global.bak
+echo "--->  Making backup of .gitconfig"
+cp $HOME/.gitconfig $HOME/.gitconfig.bak
+echo "--->  Linking .gitconfig"
+ln -sf $BASEDIR/.gitconfig $HOME/.gitconfig
+echo "--->  Linking .gitignore_global"
+ln -sf $BASEDIR/.gitignore_global $HOME/.gitignore_global
 
-echo "--->  Linking bash_profile"
-ln -sf $BASEDIR/shell/bash_profile $HOME/.bash_profile
 
-source ~/.bash_profile
+#
+# Installing zsh configurations
+#
+echo ""
+echo "===>  Installing zsh profile  <==="
+echo "--->  Making backup of .zshrc"
+cp $HOME/.zshrc $HOME/.zshrc.bak
+echo "--->  Linking .zshrc"
+ln -sf $BASEDIR/.zshrc $HOME/.zshrc
+
+source ~/.zshrc
+
 
 echo ""
 echo "====  Successfully installed Thomas's environment  ===="
