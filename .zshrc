@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="thmsmlr"
+ZSH_THEME=""
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -73,3 +73,5 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/texbin:/Users/tmi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 #
+
+source ~/.thmsmlr.zsh-theme

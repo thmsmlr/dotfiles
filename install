@@ -60,6 +60,8 @@ echo "--->  Making backup of .zshrc"
 cp $HOME/.zshrc $HOME/.zshrc.bak
 echo "--->  Linking .zshrc"
 ln -sf $BASEDIR/.zshrc $HOME/.zshrc
+echo "--->  Linking .thmsmlr.zsh-theme"
+ln -sf $BASEDIR/.thmsmlr.zsh-theme $HOME/.thmsmlr.zsh-theme
 
 source ~/.zshrc
 
