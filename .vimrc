@@ -100,6 +100,9 @@ set shiftwidth=2
 " Display incomplete commands
 set showcmd
 
+" Make rvm work in vim for whatever reason
+set shell=bash
+
 " case-sensitive search if any caps
 set smartcase
 
@@ -112,6 +115,9 @@ set tabstop=4
 " show a navigable menu for tab completion
 set wildmenu
 set wildmode=longest,list,full
+
+" minimum split width
+set winwidth=100
 
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
@@ -199,7 +205,7 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor\ -f
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  call s:wig2cmd()
+  " call s:wig2cmd()
 endif
 
 

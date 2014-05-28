@@ -54,7 +54,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/texbin:/Users/tmillar/.rvm/bin"
+export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/texbin:/Users/tmillar/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -75,3 +75,28 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/texbin:/Users/tmi
 #
 
 source ~/.thmsmlr.zsh-theme
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# Add Postgres App to PATH
+export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin"
+
+# RVM
+source /Users/stitchfixintern/.rvm/scripts/rvm
+
+export PATH="/usr/local/bin:$PATH"
+
+# Pipe tree into less
+t() { tree "$@" | less }
+
+# Don't substitute variable names for paths in the prompt
+unsetopt autonamedirs
+
+source ~/.zshrc.local
+
+# Alias Mou
+alias mou='/Applications/Mou.app/Contents/MacOS/Mou'
+
+# VirtualEnvWrapper
+export WORKON_HOME=~/.virtual-envs
+source /usr/local/bin/virtualenvwrapper.sh
