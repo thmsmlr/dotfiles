@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 if [ `whoami` == root ]; then
   echo "DONT run this script as root, or using sudo"
   exit
@@ -62,8 +64,6 @@ echo "--->  Linking .zshrc"
 ln -sf $BASEDIR/.zshrc $HOME/.zshrc
 echo "--->  Linking .thmsmlr.zsh-theme"
 ln -sf $BASEDIR/.thmsmlr.zsh-theme $HOME/.thmsmlr.zsh-theme
-
-source ~/.zshrc
 
 
 echo ""

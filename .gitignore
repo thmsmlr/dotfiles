@@ -1,1 +1,7 @@
+*.swp
+
 vim/vim
+vim/bundle/*
+vim/.netrwhist
+!vim/bundle/Vundle.vim
+
