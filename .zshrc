@@ -15,7 +15,7 @@ ZSH_THEME=""
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -81,9 +81,6 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 # Add Postgres App to PATH
 export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin"
 
-# RVM
-source /Users/stitchfixintern/.rvm/scripts/rvm
-
 export PATH="/usr/local/bin:$PATH"
 
 # Pipe tree into less
@@ -100,3 +97,17 @@ alias mou='/Applications/Mou.app/Contents/MacOS/Mou'
 # VirtualEnvWrapper
 export WORKON_HOME=~/.virtual-envs
 source /usr/local/bin/virtualenvwrapper.sh
+
+# RVM
+source /Users/stitchfixintern/.rvm/scripts/rvm
+
+function timediff() {
+  python -c "
+from dateutil.parser import *
+print str(parse('${2}') - parse('${1}'))
+  "
+}
+
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1

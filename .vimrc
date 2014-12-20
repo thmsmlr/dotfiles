@@ -2,12 +2,15 @@
 " Vundle Packages "
 """""""""""""""""""
 
-" Type :BundleInstall to install everything. 
+" Type :BundleInstall to install everything.
 
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
 " My Bundles
 
@@ -22,6 +25,7 @@ Bundle 'tmhedberg/matchit'
 
 " Helps me search
 Bundle 'mileszs/ack.vim'
+Bundle 'nelstrom/vim-visual-star-search'
 
 " Helps me align things
 Bundle 'godlygeek/tabular'
@@ -29,7 +33,18 @@ Bundle 'godlygeek/tabular'
 " Helps me comment "
 Bundle 'tpope/vim-commentary'
 
+" Helps me work with tmux
+Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'jgdavey/tslime.vim'
+
+" Helps me work with Pig
+Bundle 'motus/pig.vim'
+
+" Helps me write HTML
+Bundle 'tristen/vim-sparkup'
+
 " Required!
+call vundle#end()
 filetype plugin indent on
 syntax on
 
@@ -47,7 +62,7 @@ let &t_Co=256
 syntax enable
 
 " Set hightlight color for terminal
-hi Search cterm=NONE ctermfg=black ctermbg=white
+hi Search cterm=underline ctermfg=white ctermbg=black
 
 set autoindent
 " reload files when changed on disk, i.e. via `git checkout`
@@ -144,6 +159,7 @@ set wildignore+=*.pdf,*/tmp/*,*.so,*.swp,*.zip,*/bin/*,*.pyc,*/bundle/*,*/node_m
 " md is markdown
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.hbs set filetype=html
+autocmd BufRead,BufNewFile *.eex set filetype=html
 
 "Easier movement around the page
 noremap <C-j> 3<C-e>
@@ -152,15 +168,14 @@ noremap <S-j> 3j
 noremap <S-k> 3k
 noremap <S-l> 5l
 noremap <S-h> 5h
-noremap <C-w> :q<CR> 
+noremap <C-w> :q<CR>
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 map 0 ^
 nmap <leader>s :w<CR>
-nmap <leader>f :Ack 
-nmap <leader>a= :Tabularize /=<CR>
+nmap <leader>f :Ack
 nmap <leader>b :CtrlPBuffer<CR>
 nmap <C-p> :CtrlP<CR>
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
@@ -174,7 +189,7 @@ map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimr
 imap <C-\> λ
 
 " plugin Settings
-let g:ctrlp_working_path_mode = 0 
+let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window = 'order:ttb,max:20'
 let g:ctrlp_arg_map = 't'
 let g:gitgutter_enabled = 0
@@ -193,13 +208,14 @@ function! s:wig2cmd()
 
   " Set the user_command option
   " let g:ctrlp_user_command = 'ag %s -f -l --nocolor -g "" | grep -v -p "'. expr .'"'
-  let g:ctrlp_user_command = 'ag %s -f -l --nocolor -g ""'
   " let g:ctrlp_user_command = 'find %s -type f'
+  let g:ctrlp_user_command = 'cd %s && ag . -f -l --nocolor | grep -v -p "' . expr . '"'
 endfunction
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   let g:ackprg = 'ag --nogroup --column -f'
+  let g:ctrlp_user_command = 'cd %s && ag . -f -l --nocolor'
 
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor\ -f
@@ -223,6 +239,26 @@ function! InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Align Stuff
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! EasyTabularize()
+    call inputsave()
+    let key = input('Enter align token: ')
+    call inputrestore()
+    let m = mode(1)
+    if m == 'n'
+      execute "Tabularize /" . key . ".*/"
+    else
+      execute ":'<,'> Tabularize /" . key . ".*/"
+    end
+endfunction
+
+nmap <leader>a :call EasyTabularize()<cr>
+vmap <leader>a :call EasyTabularize()<cr>
+
 
 " Manually source custom plugins
 source ~/.vim/whitespace/plugin/whitespace.vim
