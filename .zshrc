@@ -79,7 +79,7 @@ source ~/.thmsmlr.zsh-theme
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # Add Postgres App to PATH
-export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin"
+export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin"
 
 export PATH="/usr/local/bin:$PATH"
 
@@ -99,7 +99,10 @@ export WORKON_HOME=~/.virtual-envs
 source /usr/local/bin/virtualenvwrapper.sh
 
 # RVM
-source /Users/stitchfixintern/.rvm/scripts/rvm
+source /Users/tmillar/.rvm/scripts/rvm
+
+# Python
+export PYTHONSTARTUP=~/.pythonrc
 
 function timediff() {
   python -c "

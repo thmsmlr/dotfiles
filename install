@@ -21,8 +21,10 @@ cd `dirname $0`
 #
 echo ""
 echo "===>  Installing vim  <==="
-echo "--->  Backing up any previous .vimrc"
-cp $HOME/.vimrc $HOME/.vimrc.bak
+if [ -f $HOME/.vimrc ]; then
+  echo "--->  Backing up any previous .vimrc"
+  cp $HOME/.vimrc $HOME/.vimrc.bak
+fi
 echo "--->  Linking .vimrc"
 ln -sf $BASEDIR/.vimrc $HOME/.vimrc
 echo "--->  Linking .vim folder"
@@ -33,8 +35,10 @@ ln -sf $BASEDIR/vim $HOME/.vim
 #
 echo ""
 echo "===>  Installing tmux configurations <==="
-echo "--->  Making backup of .tmux.conf"
-cp $HOME/.tmux.conf $HOME/.tmux.conf.bak
+if [ -f $HOME/.tmux.conf ]; then
+  echo "--->  Making backup of .tmux.conf"
+  cp $HOME/.tmux.conf $HOME/.tmux.conf.bak
+fi
 echo "--->  Linking .tmux.conf"
 ln -sf $BASEDIR/.tmux.conf $HOME/.tmux.conf
 
@@ -43,10 +47,14 @@ ln -sf $BASEDIR/.tmux.conf $HOME/.tmux.conf
 #
 echo ""
 echo "===>  Installing git configurations <==="
-echo "--->  Making backup of .gitignore_global"
-cp $HOME/.gitignore_global $HOME/.gitignore_global.bak
-echo "--->  Making backup of .gitconfig"
-cp $HOME/.gitconfig $HOME/.gitconfig.bak
+if [ -f $HOME/.gitignore_global ]; then
+  echo "--->  Making backup of .gitignore_global"
+  cp $HOME/.gitignore_global $HOME/.gitignore_global.bak
+fi
+if [ -f $HOME/.gitconfig ]; then
+  echo "--->  Making backup of .gitconfig"
+  cp $HOME/.gitconfig $HOME/.gitconfig.bak
+fi
 echo "--->  Linking .gitconfig"
 ln -sf $BASEDIR/.gitconfig $HOME/.gitconfig
 echo "--->  Linking .gitignore_global"
@@ -58,12 +66,26 @@ ln -sf $BASEDIR/.gitignore_global $HOME/.gitignore_global
 #
 echo ""
 echo "===>  Installing zsh profile  <==="
-echo "--->  Making backup of .zshrc"
-cp $HOME/.zshrc $HOME/.zshrc.bak
+if [ -f $HOME/.zshrc ]; then
+  echo "--->  Making backup of .zshrc"
+  cp $HOME/.zshrc $HOME/.zshrc.bak
+fi
 echo "--->  Linking .zshrc"
 ln -sf $BASEDIR/.zshrc $HOME/.zshrc
 echo "--->  Linking .thmsmlr.zsh-theme"
 ln -sf $BASEDIR/.thmsmlr.zsh-theme $HOME/.thmsmlr.zsh-theme
+
+#
+# Installing Python 
+#
+echo ""
+echo "===>  Installing Python profile  <==="
+if [ -f $HOME/.pythonrc ]; then
+  echo "--->  Making backup of .pythonrc"
+  cp $HOME/.pythonrc $HOME/.pythonrc.bak
+fi
+echo "--->  Linking .pythonrc"
+ln -sf $BASEDIR/.pythonrc $HOME/.pythonrc
 
 
 echo ""
