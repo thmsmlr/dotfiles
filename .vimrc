@@ -56,7 +56,7 @@ let mapleader = ","
 
 " Set 256 ANSI Colors
 let &t_Co=256
-:color sunburst
+:color Sunburst
 
 " enable syntax highlighting
 syntax enable
