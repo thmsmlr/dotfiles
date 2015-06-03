@@ -74,6 +74,8 @@ echo "--->  Linking .zshrc"
 ln -sf $BASEDIR/.zshrc $HOME/.zshrc
 echo "--->  Linking .thmsmlr.zsh-theme"
 ln -sf $BASEDIR/.thmsmlr.zsh-theme $HOME/.thmsmlr.zsh-theme
+echo "--->  Creating local configurations"
+touch $HOME/.zshrc.local
 
 #
 # Installing Python 

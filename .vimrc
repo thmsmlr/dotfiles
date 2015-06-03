@@ -43,6 +43,9 @@ Bundle 'motus/pig.vim'
 " Helps me write HTML
 Bundle 'tristen/vim-sparkup'
 
+" Helps with indentation in Javascript
+Bundle "pangloss/vim-javascript"
+
 " Required!
 call vundle#end()
 filetype plugin indent on
@@ -99,6 +102,9 @@ set laststatus=2
 " show trailing whitespace
 set list
 set listchars=tab:▸\ ,trail:▫
+
+" Allow mouse scrolling
+set mouse=nicr
 
 " show line numbers
 set number
@@ -262,3 +268,7 @@ vmap <leader>a :call EasyTabularize()<cr>
 
 " Manually source custom plugins
 source ~/.vim/whitespace/plugin/whitespace.vim
+
+
+" For editing crontabs
+autocmd filetype crontab setlocal nobackup nowritebackup
