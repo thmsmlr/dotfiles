@@ -18,7 +18,7 @@ Plugin 'gmarik/Vundle.vim'
 Bundle 'tpope/vim-fugitive'
 
 " Helps me move
-Bundle 'kien/ctrlp.vim'
+" Bundle 'kien/ctrlp.vim'
 
 " Extends % operator to match html tags.
 Bundle 'tmhedberg/matchit'
@@ -45,6 +45,9 @@ Bundle 'tristen/vim-sparkup'
 
 " Helps with indentation in Javascript
 Bundle "pangloss/vim-javascript"
+
+" Helps me write Scala
+Bundle 'derekwyatt/vim-scala'
 
 " Required!
 call vundle#end()
@@ -182,8 +185,8 @@ noremap <C-l> <C-w>l
 map 0 ^
 nmap <leader>s :w<CR>
 nmap <leader>f :Ack
-nmap <leader>b :CtrlPBuffer<CR>
-nmap <C-p> :CtrlP<CR>
+" nmap <leader>b :CtrlPBuffer<CR>
+" nmap <C-p> :CtrlP<CR>
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :GitGutterToggle<CR>
 nmap <leader>c gcc
@@ -195,33 +198,33 @@ map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimr
 imap <C-\> λ
 
 " plugin Settings
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window = 'order:ttb,max:20'
-let g:ctrlp_arg_map = 't'
+" let g:ctrlp_working_path_mode = 0
+" let g:ctrlp_match_window = 'order:ttb,max:20'
+" let g:ctrlp_arg_map = 't'
 let g:gitgutter_enabled = 0
 let g:Powerline_symbols = 'fancy'
 
 " Use vim wildignore with ctrlp user command and The Silver Searcher
-function! s:wig2cmd()
-  " Change wildignore into space or | separated groups
-  " e.g. .aux .out .toc .jpg .bmp .gif
-  " or   .aux$\|.out$\|.toc$\|.jpg$\|.bmp$\|.gif$
-  let pats = ['\**\([?_.0-9A-Za-z]\+\)\([*\/]*\)\(\\\@<!,\|$\)','\\\@<!,']
-  let subs = ['\1\2\3', '\\|']
-  let expr = substitute(&wig, pats[0], subs[0], 'g')
-  let expr = substitute(expr, pats[1], subs[1], 'g')
-  let expr = substitute(expr, '\\,', ',', 'g')
+" function! s:wig2cmd()
+"   " Change wildignore into space or | separated groups
+"   " e.g. .aux .out .toc .jpg .bmp .gif
+"   " or   .aux$\|.out$\|.toc$\|.jpg$\|.bmp$\|.gif$
+"   let pats = ['\**\([?_.0-9A-Za-z]\+\)\([*\/]*\)\(\\\@<!,\|$\)','\\\@<!,']
+"   let subs = ['\1\2\3', '\\|']
+"   let expr = substitute(&wig, pats[0], subs[0], 'g')
+"   let expr = substitute(expr, pats[1], subs[1], 'g')
+"   let expr = substitute(expr, '\\,', ',', 'g')
 
-  " Set the user_command option
-  " let g:ctrlp_user_command = 'ag %s -f -l --nocolor -g "" | grep -v -p "'. expr .'"'
-  " let g:ctrlp_user_command = 'find %s -type f'
-  let g:ctrlp_user_command = 'cd %s && ag . -f -l --nocolor | grep -v -p "' . expr . '"'
-endfunction
+"   " Set the user_command option
+"   " let g:ctrlp_user_command = 'ag %s -f -l --nocolor -g "" | grep -v -p "'. expr .'"'
+"   " let g:ctrlp_user_command = 'find %s -type f'
+"   let g:ctrlp_user_command = 'cd %s && ag . -f -l --nocolor | grep -v -p "' . expr . '"'
+" endfunction
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   let g:ackprg = 'ag --nogroup --column -f'
-  let g:ctrlp_user_command = 'cd %s && ag . -f -l --nocolor'
+  " let g:ctrlp_user_command = 'cd %s && ag . -f -l --nocolor'
 
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor\ -f
@@ -264,6 +267,26 @@ endfunction
 
 nmap <leader>a :call EasyTabularize()<cr>
 vmap <leader>a :call EasyTabularize()<cr>
+
+
+" Run a given vim command on the results of fuzzy selecting from a given shell
+" command. See usage below.
+function! SelectaCommand(choice_command, selecta_args, vim_command)
+    try
+        let selection = system(a:choice_command . " | selecta " . a:selecta_args)
+    catch /Vim:Interrupt/
+        " Swallow the ^C so that the redraw below happens; otherwise there will be
+        " leftovers from selecta on the screen
+        redraw!
+        return
+    endtry
+    redraw!
+    exec a:vim_command . " " . selection
+endfunction
+
+" Find all files in all non-dot directories starting in the working directory.
+" Fuzzy select one of those. Open the selected file with :e.
+nnoremap <C-p> :call SelectaCommand("ag . -f -l --nocolor", "", ":e")<cr>
 
 
 " Manually source custom plugins
