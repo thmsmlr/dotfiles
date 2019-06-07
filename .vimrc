@@ -35,6 +35,9 @@ Plug 'tristen/vim-sparkup'
 " Helps with indentation in Javascript
 Plug 'pangloss/vim-javascript'
 
+" Helps with indentation in Javascript
+Plug 'dag/vim-fish'
+
 " Required!
 call plug#end()
 
