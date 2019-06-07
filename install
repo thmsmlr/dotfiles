@@ -28,6 +28,21 @@ echo "--->  Install VIM-Plug in .vim folder"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 #
+# Installing Fish Configurations
+#
+echo ""
+echo "===>  Installing Fish configurations <==="
+mkdir -p $HOME/.config/fish/
+if [ -f $HOME/.config/fish/config.fish ]; then
+  echo "--->  Making backup of config.fish"
+  cp $HOME/.config/fish/config.fish $HOME/.config/fish/config.fish.bak
+fi
+echo "--->  Linking config.fish"
+ln -sf $BASEDIR/config.fish $HOME/.config/fish/config.fish
+curl -L https://get.oh-my.fish | fish
+echo 'omf install bobthefish' | fish
+
+#
 # Installing tmux configurations
 #
 echo ""
