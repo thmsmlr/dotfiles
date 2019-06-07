@@ -12,3 +12,7 @@ set -gx STITCHFIX_USER_EMAIL tmillar@stitchfix.com
 function activate
   source $PYENV_ROOT/versions/$argv/bin/activate.fish
 end
+
+function sfclone
+  git clone git@github.com:stitchfix/$argv.git
+end
