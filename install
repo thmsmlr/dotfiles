@@ -25,7 +25,7 @@ ln -sf $BASEDIR/.vimrc $HOME/.vimrc
 echo "--->  Linking .vim folder"
 ln -sf $BASEDIR/vim $HOME/.vim
 echo "--->  Install VIM-Plug in .vim folder"
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 #
 # Installing tmux configurations
