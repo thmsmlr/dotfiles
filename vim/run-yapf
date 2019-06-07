@@ -1,0 +1,17 @@
+#!/bin/bash
+
+find-up () {
+  path=$(pwd)
+  while [[ "$path" != "" && ! -e "$path/$1" ]]; do
+    path=${path%/*}
+  done
+  echo "$path"
+}
+
+if [ -n "$(find-up setup.cfg)" ]; then
+    yapf -i $1 > /dev/null 2>&1
+elif [ -n "$(find-up .style.yapf)" ]; then
+    yapf -i $1 > /dev/null 2>&1
+elif [ -n "$(find-up pyproject.toml)" ]; then
+    black $1 > /dev/null 2>&1
+fi

@@ -147,6 +147,8 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.hbs set filetype=html
 autocmd BufRead,BufNewFile *.eex set filetype=html
 
+autocmd BufWritePost *.py silent! execute '!bash ~/.vim/run-yapf %' | redraw
+
 "Easier movement around the page
 noremap <C-j> 3<C-e>
 noremap <C-k> 3<C-y>
