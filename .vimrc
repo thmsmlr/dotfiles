@@ -173,6 +173,7 @@ vmap <leader>c gc
 vmap <leader>a= :Tabularize /=<CR>
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 map <silent> <leader>C :CtrlPClearAllCaches<CR>:exe ":echo 'CtrlPCache reset'"<CR>
+map ,T :map ,t :!
 
 " Custom Characters
 imap <C-\> λ
