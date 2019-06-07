@@ -1,58 +1,42 @@
 """""""""""""""""""
-" Vundle Packages "
+" plug Packages "
 """""""""""""""""""
 
-" Type :BundleInstall to install everything.
+" Type :PlugInstall to install everything.
 
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" My Bundles
+call plug#begin()
 
 " Helps me deal with Git
-Bundle 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " Helps me move
-" Bundle 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 
 " Extends % operator to match html tags.
-Bundle 'tmhedberg/matchit'
+Plug 'tmhedberg/matchit'
 
 " Helps me search
-Bundle 'mileszs/ack.vim'
-Bundle 'nelstrom/vim-visual-star-search'
+Plug 'mileszs/ack.vim'
+Plug 'nelstrom/vim-visual-star-search'
 
 " Helps me align things
-Bundle 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 
 " Helps me comment "
-Bundle 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 
 " Helps me work with tmux
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'jgdavey/tslime.vim'
-
-" Helps me work with Pig
-Bundle 'motus/pig.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'jgdavey/tslime.vim'
 
 " Helps me write HTML
-Bundle 'tristen/vim-sparkup'
+Plug 'tristen/vim-sparkup'
 
 " Helps with indentation in Javascript
-Bundle "pangloss/vim-javascript"
-
-" Helps me write Scala
-Bundle 'derekwyatt/vim-scala'
+Plug 'pangloss/vim-javascript'
 
 " Required!
-call vundle#end()
-filetype plugin indent on
-syntax on
+call plug#end()
 
 let mapleader = ","
 

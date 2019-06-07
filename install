@@ -1,11 +1,6 @@
 #!/bin/bash
 set -e
 
-if [ `whoami` == root ]; then
-  echo "DONT run this script as root, or using sudo"
-  exit
-fi
-
 echo ""
 echo "*************************************"
 echo "* Setting up ideal Unix environment *"
@@ -29,6 +24,8 @@ echo "--->  Linking .vimrc"
 ln -sf $BASEDIR/.vimrc $HOME/.vimrc
 echo "--->  Linking .vim folder"
 ln -sf $BASEDIR/vim $HOME/.vim
+echo "--->  Install VIM-Plug in .vim folder"
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 #
 # Installing tmux configurations
@@ -60,22 +57,6 @@ ln -sf $BASEDIR/.gitconfig $HOME/.gitconfig
 echo "--->  Linking .gitignore_global"
 ln -sf $BASEDIR/.gitignore_global $HOME/.gitignore_global
 
-
-#
-# Installing zsh configurations
-#
-echo ""
-echo "===>  Installing zsh profile  <==="
-if [ -f $HOME/.zshrc ]; then
-  echo "--->  Making backup of .zshrc"
-  cp $HOME/.zshrc $HOME/.zshrc.bak
-fi
-echo "--->  Linking .zshrc"
-ln -sf $BASEDIR/.zshrc $HOME/.zshrc
-echo "--->  Linking .thmsmlr.zsh-theme"
-ln -sf $BASEDIR/.thmsmlr.zsh-theme $HOME/.thmsmlr.zsh-theme
-echo "--->  Creating local configurations"
-touch $HOME/.zshrc.local
 
 #
 # Installing Python 
