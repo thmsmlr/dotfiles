@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/tmillar/dotfiles'
-let g:netrw_dirhist_2='/home/tmillar'
-let g:netrw_dirhist_3='/home'
-let g:netrw_dirhist_4='/home/tmillar/dotfiles/code/mixer'
-let g:netrw_dirhist_5='/home/tmillar/dotfiles'
-let g:netrw_dirhist_6='/home/tmillar/tmillar-workstation'
-let g:netrw_dirhist_7='/home/tmillar/dotfiles'
-let g:netrw_dirhist_8='/home/tmillar/code/clientrecs/services/apec'
-let g:netrw_dirhist_9='/root/code/clientrecs/services/apec'
+let g:netrw_dirhist_cnt =0
