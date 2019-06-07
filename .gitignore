@@ -1,9 +1,7 @@
 *.swp
 
 vim/vim
-vim/bundle/*
-vim/autoload/*
-vim/plugged/*
-vim/.netrwhist
-!vim/bundle/Vundle.vim
+vim/bundle*
+vim/autoload*
+vim*plugged*
 

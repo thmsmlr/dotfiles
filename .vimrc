@@ -130,16 +130,6 @@ set winwidth=100
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
 
-" Fix escape delay
-if ! has('gui_running')
-  set ttimeoutlen=10
-  augroup FastEscape
-    autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=1000
-  augroup END
-endif
-
 filetype plugin indent on
 
 "Reselect visual block after indent/outdent
@@ -177,9 +167,13 @@ nmap <leader>c gcc
 vmap <leader>c gc
 vmap <leader>a= :Tabularize /=<CR>
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map <silent> <leader>C :CtrlPClearAllCaches<CR>:exe ":echo 'CtrlPCache reset'"<CR>
 
 " Custom Characters
 imap <C-\> λ
+
+set timeoutlen=500
+set ttimeoutlen=500
 
 " plugin Settings
 " let g:ctrlp_working_path_mode = 0
@@ -188,33 +182,15 @@ imap <C-\> λ
 let g:gitgutter_enabled = 0
 let g:Powerline_symbols = 'fancy'
 
-" Use vim wildignore with ctrlp user command and The Silver Searcher
-" function! s:wig2cmd()
-"   " Change wildignore into space or | separated groups
-"   " e.g. .aux .out .toc .jpg .bmp .gif
-"   " or   .aux$\|.out$\|.toc$\|.jpg$\|.bmp$\|.gif$
-"   let pats = ['\**\([?_.0-9A-Za-z]\+\)\([*\/]*\)\(\\\@<!,\|$\)','\\\@<!,']
-"   let subs = ['\1\2\3', '\\|']
-"   let expr = substitute(&wig, pats[0], subs[0], 'g')
-"   let expr = substitute(expr, pats[1], subs[1], 'g')
-"   let expr = substitute(expr, '\\,', ',', 'g')
-
-"   " Set the user_command option
-"   " let g:ctrlp_user_command = 'ag %s -f -l --nocolor -g "" | grep -v -p "'. expr .'"'
-"   " let g:ctrlp_user_command = 'find %s -type f'
-"   let g:ctrlp_user_command = 'cd %s && ag . -f -l --nocolor | grep -v -p "' . expr . '"'
-" endfunction
-
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
-  let g:ackprg = 'ag --nogroup --column -f'
-  " let g:ctrlp_user_command = 'cd %s && ag . -f -l --nocolor'
-
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor\ -f
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  " call s:wig2cmd()
+  " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast, respects .gitignore
+  " and .agignore. Ignores hidden files by default.
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -f -g ""'
+else
+  "ctrl+p ignore files in .gitignore
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 endif
 
 
@@ -251,26 +227,6 @@ endfunction
 
 nmap <leader>a :call EasyTabularize()<cr>
 vmap <leader>a :call EasyTabularize()<cr>
-
-
-" Run a given vim command on the results of fuzzy selecting from a given shell
-" command. See usage below.
-function! SelectaCommand(choice_command, selecta_args, vim_command)
-    try
-        let selection = system(a:choice_command . " | selecta " . a:selecta_args)
-    catch /Vim:Interrupt/
-        " Swallow the ^C so that the redraw below happens; otherwise there will be
-        " leftovers from selecta on the screen
-        redraw!
-        return
-    endtry
-    redraw!
-    exec a:vim_command . " " . selection
-endfunction
-
-" Find all files in all non-dot directories starting in the working directory.
-" Fuzzy select one of those. Open the selected file with :e.
-nnoremap <C-p> :call SelectaCommand("ag . -f -l --nocolor", "", ":e")<cr>
 
 
 " Manually source custom plugins
