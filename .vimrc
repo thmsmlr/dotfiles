@@ -184,7 +184,7 @@ set timeoutlen=500
 set ttimeoutlen=500
 
 " plugin Settings
-" let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 0
 " let g:ctrlp_match_window = 'order:ttb,max:20'
 " let g:ctrlp_arg_map = 't'
 let g:gitgutter_enabled = 0
@@ -198,7 +198,7 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -f -g ""'
 else
   "ctrl+p ignore files in .gitignore
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  " let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 endif
 
 
