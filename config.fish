@@ -19,6 +19,10 @@ function sfclone
   git clone git@github.com:stitchfix/$argv.git
 end
 
-function publish
+function igor-publish
   /root/code/igor-publish/command $argv
+end
+
+function igor-new
+  /root/code/igor-new/command $argv
 end

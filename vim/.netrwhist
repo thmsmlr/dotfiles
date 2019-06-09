@@ -1,6 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/home/tmillar/dotfiles'
 let g:netrw_dirhist_2='/root/code/clientrecs/services/apec'
 let g:netrw_dirhist_3='/root'
 let g:netrw_dirhist_4='/home/tmillar/dotfiles'
+let g:netrw_dirhist_5='/home/tmillar/dotfiles/vim'
+let g:netrw_dirhist_6='/home/tmillar/dotfiles'
