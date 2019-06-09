@@ -149,6 +149,7 @@ autocmd BufRead,BufNewFile *.hbs set filetype=html
 autocmd BufRead,BufNewFile *.eex set filetype=html
 
 autocmd BufWritePost *.py silent! execute '!bash ~/.vim/run-yapf %' | redraw
+autocmd BufWritePost *.js silent! execute '!bash ~/.vim/run-prettier %' | redraw
 
 "Easier movement around the page
 noremap <C-j> 3<C-e>
