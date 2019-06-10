@@ -40,7 +40,7 @@ fi
 echo "--->  Linking config.fish"
 ln -sf $BASEDIR/config.fish $HOME/.config/fish/config.fish
 curl -L https://get.oh-my.fish | fish
-echo 'omf install clearance' | fish
+echo 'omf install clearance; exit' | fish
 
 #
 # Installing tmux configurations
