@@ -22,3 +22,5 @@ end
 function igor-publish
   /root/code/igor-publish/command $argv
 end
+
+activate global
