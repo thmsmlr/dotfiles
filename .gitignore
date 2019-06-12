@@ -1,6 +1,7 @@
 *.swp
 
 vim/vim
+vim/.netrwhist
 vim/bundle*
 vim/autoload*
 vim*plugged*

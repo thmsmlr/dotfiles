@@ -24,3 +24,5 @@ function igor-publish
 end
 
 activate global
+
+set -gx EDITOR vim
