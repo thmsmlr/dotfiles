@@ -8,6 +8,7 @@ set -gx PYENV_ROOT /stitchfix/z-pyenv/pyenv
 set -gx PATH $PYENV_ROOT/bin $PATH
 
 set -gx STITCHFIX_USER_EMAIL tmillar@stitchfix.com
+set -gx STITCHFIX_OWNER_ID tmillar@stitchfix.com
 set -gx AWS_DEFAULT_REGION us-east-1
 
 
